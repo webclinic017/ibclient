@@ -6,22 +6,29 @@ Created on 10/18/2016
 @author: Jin Xu
 @contact: jin_xu1@qq.com
 '''
-from __future__ import absolute_import, print_function, division
-import pandas as pd
+from __future__ import absolute_import
+from __future__ import print_function
+from __future__ import division
+
 import datetime as datetime
 from copy import copy
 import threading
 from threading import Event
 from time import sleep
+import pandas as pd
 from ib.ext.Order import Order
 from ib.ext.EClientSocket import EClientSocket
-from ib.ext.ContractDetails import ContractDetails
-from ib.ext.Contract import Contract
-from .IBMsgWrapper import *
-from .IBUtils import *
-from .IBContract import *
-from .IBXMLparser import *
-from .IBSystemErrors import IB_FARM_NAME_LS
+
+from .msg_wrapper import *
+from .utils import (RequestDetails,
+                    ResponseDetails)
+from .contract import *
+from .orders_style import *
+from .parsers import (parse_ownership_report,
+                      parse_analyst_estimates,
+                      parse_fin_statements)
+
+from .constants import IB_FARM_NAME_LS
 
 
 
@@ -43,7 +50,6 @@ class IBClient(object):
         self.order_dict = {}  # key: ticker ID or request ID; value: request and response objects; response objects ususally carrys data, Events, and Status
 
         self.context = None  # key: ticker ID or request ID; value: request and response objects; response objects ususally carrys data, Events, and Status
-        self.data = None
 
         self.wrapper = IBMsgWrapper(self)  # the instance with IB message callback methods
         self.connection = EClientSocket(self.wrapper)  # low layer socket client
@@ -104,7 +110,7 @@ class IBClient(object):
     def register_strategy(self, context, data):
         """  TBA """
         self.context = context
-        self.data = data
+
 
     def __get_new_request_id(self):
         '''' genew request ID (ticker ID) in a thread safe way '''
@@ -472,7 +478,7 @@ class IBClient(object):
 
     def get_contract_price_history(self, contract, ts_end, duration='1 M', frequency='daily', max_wait_time=30):
         # Same function as get_price_history
-        return self.get_price_history(self, contract, ts_end, duration, frequency, max_wait_time)
+        return self.get_price_history(contract, ts_end, duration, frequency, max_wait_time)
 
     #
     # Placing/Changing/Canceling Order Methods

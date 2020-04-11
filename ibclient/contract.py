@@ -6,7 +6,10 @@ Created on 10/18/2016
 @author: Jin Xu
 @contact: jin_xu1@qq.com
 '''
-from __future__ import absolute_import, print_function, division
+from __future__ import absolute_import
+from __future__ import print_function
+from __future__ import division
+
 from ib.ext.Contract import Contract
 from ib.ext.ComboLeg import ComboLeg
 

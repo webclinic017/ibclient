@@ -8,15 +8,16 @@ Created on 11/21/2016
 @contact: jin_xu1@qq.com
 '''
 from __future__ import absolute_import, print_function, division
-from ib.ext.Contract import Contract
-from ibclient.Account import Portfolio
-from ibclient.IBContract import new_stock_contract
+import pandas as pd
+from datetime import datetime
+from .account import Portfolio
+from .contract import new_stock_contract
 
 
 class Context(object):
     def __init__(self):
         # Setup time related variables
-        from datetime import datetime
+
         now = datetime.now()
         self.year = now.year
         self.month = now.month
@@ -36,7 +37,7 @@ class Context(object):
         self.account = self.portfolio.account
 
     def init_symbol_db(self, db_file):
-        import pandas as pd
+
 
         df = pd.read_csv(db_file, dtype={'Symbol': str, 'Name': str, 'Exchange': str, 'Type': str, 'Currency': str,
                                          'Conid': int})
@@ -58,7 +59,3 @@ class Context(object):
         assert (isinstance(conid, int))
         return self.symbol_conid_tbl.get(conid)
 
-
-class Data(object):
-    def __init__(self):
-        pass

@@ -6,19 +6,22 @@ Created on 10/18/2016
 @author: Jin Xu
 @contact: jin_xu1@qq.com
 '''
-from __future__ import absolute_import, print_function, division
+from __future__ import absolute_import
+from __future__ import print_function
+from __future__ import division
+
 import pytz
 from datetime import datetime
 from copy import copy
 
 from ib.ext.EWrapper import EWrapper
 from ib.ext.EClientErrors import EClientErrors
-from .IBUtils import *
-from .IBSystemErrors import *
-from .Account import *
+from .utils import *
+from .account import *
+from .constants import *
 
 class IBMsgWrapper(EWrapper):
-    """ This class define IB Sock Message Call Back Mehtods, determining the way handling these messages"""
+    """ This class define IB socket callback methods, determining the way handling these messages"""
     def __init__(self, ib_client):
         """Constructor"""
         super(IBMsgWrapper, self).__init__()

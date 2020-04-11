@@ -1,31 +1,28 @@
-﻿__version__ = '0.0.1'
+﻿__version__ = '0.0.2'
 __author__ = 'Jin Xu'
 
 """
 for IB client
 """
-from ibclient.IBClient import (IBClient)
+from ibclient.ib_client import (IBClient)
 
 """
 for util functions
 """
-from ibclient.IBUtils import *
+from ibclient.utils import *
 
 """
 for contract functions
 """
-from ibclient.IBContract import *
+from ibclient.contract import *
+from ibclient.orders_style import *
 
 """
-for Account definitions
+Account definitions
 """
-from ibclient.Account import (Portfolio, Account, Position)
+from ibclient.account import (Portfolio, Account, Position)
 
 """
-for Context definitions
+Context definitions
 """
 from ibclient.Context import (Context, Data)
-
-
-from ibclient.IBMsgWrapper import (IBMsgWrapper)
-
