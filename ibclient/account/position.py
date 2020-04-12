@@ -37,3 +37,7 @@ class Position(object):
     def __str__(self):
         return "\t%.2f\t\t%d\t\t%.2f\t\t%.2f\t\t%.2f\n" % (self.last_sale_price, self.amount, self.cost_basis,
                                                            self.unrealized_pnl, self.realized_pnl)
+
+    def __repr__(self):
+        return "\t%.2f\t\t%d\t\t%.2f\t\t%.2f\t\t%.2f\n" % (self.last_sale_price, self.amount, self.cost_basis,
+                                                           self.unrealized_pnl, self.realized_pnl)

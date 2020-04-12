@@ -16,8 +16,8 @@ from copy import copy
 
 from ib.ext.EWrapper import EWrapper
 from ib.ext.EClientErrors import EClientErrors
-from .utils import *
-from .account import *
+from .utils import (RequestDetails,ResponseDetails,CodeMsgPair, IBSystemErrors)
+from .account import (Account, Position, Portfolio)
 from .constants import *
 
 class IBMsgWrapper(EWrapper):

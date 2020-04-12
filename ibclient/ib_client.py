@@ -19,27 +19,35 @@ import pandas as pd
 from ib.ext.Order import Order
 from ib.ext.EClientSocket import EClientSocket
 
-from .msg_wrapper import *
-from .utils import (RequestDetails,
+from ibclient.msg_wrapper import IBMsgWrapper
+from ibclient.utils import (RequestDetails,
                     ResponseDetails)
-from .contract import *
-from .orders_style import *
-from .parsers import (parse_ownership_report,
+
+from ibclient.parsers import (parse_ownership_report,
                       parse_analyst_estimates,
                       parse_fin_statements)
 
 from .constants import IB_FARM_NAME_LS
-
-
+from .orders_style import *
+from .contract import *
 
 class IBClient(object):
     """IB Socket client"""
 
-    def __init__(self, client_name='IB', host='localhost', port=7496, client_id=0):
-        """Constructor"""
+    def __init__(self, host='localhost', port=7496, client_id=0, client_name='IB'):
+        """
+
+        Args:
+            host: TWS 所在机器的 IP或域名
+            port: TWS配置的接收外部API的端口.TWS default value: 7496; TWS demo account default value: 7497
+            client_id: API<->TWS之间 sock连接的ID
+            client_name: 本次连接的名字。可选
+        """
+
+
         self.client_name = client_name
         self.host = host  # host IP address in a string; e.g. '127.0.0.1', 'localhost'
-        self.port = port  # socket port; TWS default value: 7496; TWS demo account default value: 7497
+        self.port = port  # socket port;
         self.client_id = client_id  # socket client id
 
         self.connected = False  # status of the socket connection
